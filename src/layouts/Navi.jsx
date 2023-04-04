@@ -18,10 +18,7 @@ export default function Navi() {
             name='Ana Sayfa'
 
           />
-          <Menu.Item
-            name='Mesajlar'
-
-          />
+          
 
           <Menu.Menu position='right'>
             <MenuItem>

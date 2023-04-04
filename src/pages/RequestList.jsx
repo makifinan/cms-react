@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Icon, Menu, Table } from 'semantic-ui-react'
-
+import RequestService from '../services/RequestService'
 export default function RequestList() {
+
+    const [requests, setRequests] = useState([])
+
+    useEffect(() => {
+        let requestService = new RequestService()
+        requestService.getRequests().then(result => setRequests(result.data.data))
+    },[])
+
+
+
     return (
         <div>
             <Table className='table' celled>
@@ -16,27 +26,19 @@ export default function RequestList() {
                 </Table.Header>
 
                 <Table.Body>
-                    <Table.Row>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                        <Table.Cell>Cell</Table.Cell>
-                    </Table.Row>
+                    {
+                        requests.map((request) => (
+                            <Table.Row key={request.id}>
+                                <Table.Cell>{request.generatedDate}</Table.Cell>
+                                <Table.Cell>{request.endDate}</Table.Cell>
+                                <Table.Cell>{request.developerUser.firstname}</Table.Cell>
+                                <Table.Cell>{request.priorty.priortyName}</Table.Cell>
+                                <Table.Cell>{request.statu.statuName}</Table.Cell>
+                            </Table.Row>
+                        ))
+                    }
+
+
                 </Table.Body>
 
                 <Table.Footer>
