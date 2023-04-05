@@ -1,14 +1,21 @@
+
 import React, { useEffect, useState } from 'react'
 import { Icon, Menu, Table } from 'semantic-ui-react'
-import RequestService from '../services/RequestService'
+import RequestService from '../services//RequestService.js'
 export default function RequestList() {
 
     const [requests, setRequests] = useState([])
 
     useEffect(() => {
-        let requestService = new RequestService()
-        requestService.getRequests().then(result => setRequests(result.data.data))
-    },[])
+        let requestService = new RequestService();
+        requestService.getRequests()
+            .then((result) => {
+                setRequests(result.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
 
 
 
@@ -27,13 +34,15 @@ export default function RequestList() {
 
                 <Table.Body>
                     {
-                        requests.map((request) => (
+
+                        requests && requests.map((request) => (
                             <Table.Row key={request.id}>
+
                                 <Table.Cell>{request.generatedDate}</Table.Cell>
                                 <Table.Cell>{request.endDate}</Table.Cell>
-                                <Table.Cell>{request.developerUser.firstname}</Table.Cell>
-                                <Table.Cell>{request.priorty.priortyName}</Table.Cell>
-                                <Table.Cell>{request.statu.statuName}</Table.Cell>
+                                <Table.Cell>{request.developerUserId}</Table.Cell>
+                                <Table.Cell>{request.priorityId}</Table.Cell>
+                                <Table.Cell>{request.statuId}</Table.Cell>
                             </Table.Row>
                         ))
                     }

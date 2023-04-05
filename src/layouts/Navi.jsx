@@ -1,17 +1,16 @@
 import React from 'react'
-import { Menu, Container, MenuItem, Image } from 'semantic-ui-react'
+import { Menu, Container, MenuItem } from 'semantic-ui-react'
 import Account from './Account'
 import Notification from './Notification'
 
 export default function Navi() {
   return (
     <div>
-      <Menu stackable>
-
+      
+      <Menu>
+        <p className='pZiraat'>ZİRAAT TEKNOLOJİ</p>
         <Container>
-          <Menu.Item>
-            <Image src='../images/logo.png' />
-          </Menu.Item>
+          
 
 
           <Menu.Item

@@ -1,23 +1,42 @@
-import React from 'react'
-import { Menu } from 'semantic-ui-react'
-
+import React, { useState, useEffect } from 'react'
+import { Dropdown, Menu } from 'semantic-ui-react'
+import DeveloperUserService from '../services/DeveloperUserService'
 
 export default function LeftBar() {
+
+  const [developers, setDevelopers] = useState([])
+
+  useEffect(() => {
+    let developerService = new DeveloperUserService();
+    developerService.getDeveloperUsers().then(result => setDevelopers(result.data))
+  })
   return (
     <div>
-        <Menu pointing secondary vertical>
+      <Menu vertical>
         <Menu.Item
-          name='home'
-          
+          name='account'
+
         />
         <Menu.Item
-          name='messages'
-          
+          name='Çağrı Oluştur'
+
         />
-        <Menu.Item
-          name='friends'
-          
-        />
+        <Menu.Item vertical>
+        <Dropdown text='Geliştiriciler'>
+          <Dropdown.Menu>
+            {
+              developers.map((developer) => (
+                <Dropdown.Item key={developer.id}>
+                  {developer.firstName + ' ' + developer.lastName}
+                </Dropdown.Item>
+              )
+              )
+            }
+
+          </Dropdown.Menu>
+        </Dropdown>
+        </Menu.Item>
+        
       </Menu>
     </div>
   )
