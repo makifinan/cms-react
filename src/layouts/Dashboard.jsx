@@ -9,22 +9,24 @@ export default function Dashboard() {
     return (
         <div className='dashboard'>
             <Navi />
-            <Container className='dashboardcontainer'>
+            
                 <Grid >
                     <Grid.Row >
                         <Grid.Column width={4}>
                             <LeftBar />
                         </Grid.Column>
                         <Grid.Column  width={12}>
+                            <div className='menumargin'>
                             <ButtonGroup />
                             <RequestList />
+                            </div>
                         </Grid.Column>
 
                     </Grid.Row>
 
 
                 </Grid>
-            </Container>
+            
 
 
         </div>

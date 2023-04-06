@@ -12,7 +12,7 @@ export default function LeftBar() {
   })
   return (
     <div>
-      <Menu vertical>
+      <Menu vertical >
         <Menu.Item
           name='account'
 
@@ -21,7 +21,7 @@ export default function LeftBar() {
           name='Çağrı Oluştur'
 
         />
-        <Menu.Item vertical>
+        <Menu.Item vertical="true">
         <Dropdown text='Geliştiriciler'>
           <Dropdown.Menu>
             {

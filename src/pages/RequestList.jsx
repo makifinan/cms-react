@@ -24,6 +24,7 @@ export default function RequestList() {
             <Table className='table' celled>
                 <Table.Header>
                     <Table.Row>
+                        <Table.HeaderCell>Başlık</Table.HeaderCell>
                         <Table.HeaderCell>Oluşturulma Tarihi</Table.HeaderCell>
                         <Table.HeaderCell>Bitiş Tarihi</Table.HeaderCell>
                         <Table.HeaderCell>Geliştirici</Table.HeaderCell>
@@ -37,7 +38,7 @@ export default function RequestList() {
 
                         requests && requests.map((request) => (
                             <Table.Row key={request.id}>
-
+                                 <Table.Cell>{request.title}</Table.Cell>
                                 <Table.Cell>{request.generatedDate}</Table.Cell>
                                 <Table.Cell>{request.endDate}</Table.Cell>
                                 <Table.Cell>{request.developerUserId}</Table.Cell>
