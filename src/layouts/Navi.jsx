@@ -1,24 +1,22 @@
 import React from 'react'
-import { Menu, Container, MenuItem } from 'semantic-ui-react'
+import { Menu, MenuItem } from 'semantic-ui-react'
 import Account from './Account'
 import Notification from './Notification'
 
 export default function Navi() {
   return (
-    <div>
+    <div className='navi'>
       
-      <Menu>
+      <Menu inverted>
+        <Menu.Item >
         <p className='pZiraat'>ZİRAAT TEKNOLOJİ</p>
-        <Container>
-          
-
-
+        
+        </Menu.Item>
+        
           <Menu.Item
             name='Ana Sayfa'
 
           />
-          
-
           <Menu.Menu position='right'>
             <MenuItem>
               <Notification />
@@ -28,7 +26,7 @@ export default function Navi() {
               <Account />
             </Menu.Item>
           </Menu.Menu>
-        </Container>
+        
       </Menu>
     </div>
   )
