@@ -7,6 +7,7 @@ import Navi from './Navi'
 import { Route,  Routes } from 'react-router-dom'
 import RequestDetail from '../pages/RequestDetail'
 import DeveloperDetail from '../pages/DeveloperDetail'
+import CreateCall from '../pages/CreateCall'
 
 export default function Dashboard() {
     return (
@@ -25,6 +26,7 @@ export default function Dashboard() {
                             <Route exact path='/requests' Component={RequestList}/>
                             <Route exact path='/requests/:id' Component={RequestDetail}/>
                             <Route exact path='/developeruser/:id' Component={DeveloperDetail}/>
+                            <Route exact path='/createcall' Component={CreateCall}/>
                             </Routes>
                             
                         </div>

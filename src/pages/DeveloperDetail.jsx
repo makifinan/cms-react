@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Icon, Image, Label, Menu, Table } from 'semantic-ui-react'
+import { Card, Icon, Menu, Table } from 'semantic-ui-react'
 import DeveloperUserService from '../services/DeveloperUserService'
 import { useParams } from 'react-router-dom'
 
@@ -19,7 +19,7 @@ export default function DeveloperDetail() {
     return (
         <div className='developerdetail'>
             <Card fluid>
-                <Image src='/images/avatar/large/matthew.png' wrapped ui={false} />
+
                 <Card.Content>
 
                     <Card.Header>{developer.firstName + ' ' + developer.lastName}</Card.Header>
@@ -29,19 +29,19 @@ export default function DeveloperDetail() {
                         <span className='date'>Telefon : {developer.telNo}</span>
                     </Card.Meta>
                     <Card.Description>
-                        Matthew is a musician living in Nashville.
+
                     </Card.Description>
                 </Card.Content>
                 <Card.Content>
                     <Table celled>
                         <Table.Header>
                             <Table.Row>
-                                <Table.HeaderCell>Header</Table.HeaderCell>
-                                <Table.HeaderCell>Header</Table.HeaderCell>
-                                <Table.HeaderCell>Header</Table.HeaderCell>
-                                <Table.HeaderCell>Header</Table.HeaderCell>
-                                <Table.HeaderCell>Header</Table.HeaderCell>
-                                <Table.HeaderCell>Header</Table.HeaderCell>
+                                <Table.HeaderCell>Başlık</Table.HeaderCell>
+                                <Table.HeaderCell>Oluşturulma Tarihi</Table.HeaderCell>
+                                <Table.HeaderCell>Bitiş Tarihi</Table.HeaderCell>
+                                <Table.HeaderCell>Geliştirici</Table.HeaderCell>
+                                <Table.HeaderCell>Öncelik</Table.HeaderCell>
+                                <Table.HeaderCell>Durum</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
@@ -97,7 +97,7 @@ export default function DeveloperDetail() {
                 <Card.Content extra>
                     <a>
                         <Icon name='user' />
-                        22 Friends
+
                     </a>
                 </Card.Content>
             </Card>
