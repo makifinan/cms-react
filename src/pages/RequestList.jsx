@@ -1,17 +1,18 @@
 
 import React, { useEffect, useState } from 'react'
-import { Icon, Menu, Table } from 'semantic-ui-react'
+import { Button, Icon, Menu, Table } from 'semantic-ui-react'
 import RequestService from '../services//RequestService.js'
 import { Link } from 'react-router-dom';
 export default function RequestList() {
 
     const [requests, setRequests] = useState([])
-
+    
     useEffect(() => {
         let requestService = new RequestService();
         requestService.getRequests()
             .then((result) => {
                 setRequests(result.data);
+                
             })
             .catch((error) => {
                 console.error(error);
@@ -22,6 +23,15 @@ export default function RequestList() {
 
     return (
         <div>
+            <div className='buttongroup '>
+
+                <Button>Tüm Çağrılar</Button>
+                <Button>Zamanı Yaklaşanlar</Button>
+                <Button>Zamanı Geçenler</Button>
+                <Button>Atama Bekleyenler</Button>
+                <Button>Çözüldü</Button>
+
+            </div>
             <Table className='table' celled>
                 <Table.Header>
                     <Table.Row >
@@ -35,18 +45,18 @@ export default function RequestList() {
                 </Table.Header>
 
                 <Table.Body>
-                    {
+                    {   
                         requests && requests.map((request) => (
-                            
-                                <Table.Row key={request.id}>
-                                   <Link to={`/requests/${request.id}`}> <Table.Cell>{request.title}</Table.Cell></Link>
-                                    <Table.Cell>{request.generatedDate}</Table.Cell>
-                                    <Table.Cell>{request.endDate}</Table.Cell>
-                                    <Table.Cell>{request.developerUserId}</Table.Cell>
-                                    <Table.Cell>{request.priorityId}</Table.Cell>
-                                    <Table.Cell>{request.statuId}</Table.Cell>
-                                </Table.Row>
-                            
+
+                            <Table.Row key={request.id}>
+                                <Link to={`/requests/${request.id}`}> <Table.Cell>{request.title}</Table.Cell></Link>
+                                <Table.Cell>{request.generatedDate}</Table.Cell>
+                                <Table.Cell>{request.endDate}</Table.Cell>
+                                <Table.Cell>{request.developerUserId}</Table.Cell>
+                                <Table.Cell>{request.priorityId}</Table.Cell>
+                                <Table.Cell>{request.statuId}</Table.Cell>
+                            </Table.Row>
+
                         ))
                     }
                 </Table.Body>

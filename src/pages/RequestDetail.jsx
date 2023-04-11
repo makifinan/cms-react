@@ -22,7 +22,7 @@ export default function RequestDetail() {
       ]
 
     return (
-        <div>
+        <div className='requestdetail'>
             <Card.Group >
                 <Card fluid>
                     <Card.Content>

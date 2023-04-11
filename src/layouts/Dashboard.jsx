@@ -1,7 +1,7 @@
 import React from 'react'
 import {  Grid } from 'semantic-ui-react'
 import RequestList from '../pages/RequestList'
-import ButtonGroup from './ButtonGroup'
+
 import LeftBar from './LeftBar'
 import Navi from './Navi'
 import { Route,  Routes } from 'react-router-dom'
@@ -19,7 +19,7 @@ export default function Dashboard() {
                     </Grid.Column>
                     <Grid.Column width={12}>
                         <div className='menumargin'>
-                            <ButtonGroup/>
+                            
                             <Routes>
                             <Route exact path='/' Component={RequestList}/>
                             <Route exact path='/requests' Component={RequestList}/>

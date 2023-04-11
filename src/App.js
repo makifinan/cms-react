@@ -6,6 +6,8 @@ import './css/dashboard.css'
 import './css/leftbar.css'
 import './css/navi.css'
 import './css/notification.css'
+import './css/developerdetail.css'
+import './css/requestdetail.css'
 import Dashboard from './layouts/Dashboard';
 
 function App() {
