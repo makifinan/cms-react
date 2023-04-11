@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import DeveloperUserService from '../services/DeveloperUserService'
+import {  Link } from 'react-router-dom'
 
 export default function LeftBar() {
 
@@ -9,7 +10,7 @@ export default function LeftBar() {
   useEffect(() => {
     let developerService = new DeveloperUserService();
     developerService.getDeveloperUsers().then(result => setDevelopers(result.data))
-  })
+  },[])
   return (
     <div>
       <Menu vertical >
@@ -26,9 +27,11 @@ export default function LeftBar() {
           <Dropdown.Menu>
             {
               developers.map((developer) => (
+                
                 <Dropdown.Item key={developer.id}>
-                  {developer.firstName + ' ' + developer.lastName}
+                  <Link to={`/developeruser/${developer.id}`}>{developer.firstName + ' ' + developer.lastName}</Link>
                 </Dropdown.Item>
+                
               )
               )
             }

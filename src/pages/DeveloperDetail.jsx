@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Icon, Image } from 'semantic-ui-react'
 import DeveloperUserService from '../services/DeveloperUserService'
+import { useParams } from 'react-router-dom'
 
 export default function DeveloperDetail() {
+    let {id} = useParams()
+
 
     const [developer, setDeveloper] = useState([])
 
     useEffect(() => {
         let developerService = new DeveloperUserService()
-        developerService.getDeveloperUsers().then((result) => {
+        developerService.getById(id).then((result) => {
             setDeveloper(result.data)
         })
     }, [])
 
     return (
         <div>
-            <Card>
+            <Card fluid>
                 <Image src='/images/avatar/large/matthew.png' wrapped ui={false} />
                 <Card.Content>
-                    {
-                        developer.map((developer) => (
-
-                         ))
-                    }
-                    <Card.Header>Matthew</Card.Header>
+                    
+                    <Card.Header>{developer.firstName + ' ' + developer.lastName}</Card.Header>
                     <Card.Meta>
-                        <span className='date'>Joined in 2015</span>
+                        <span className='date'>{developer.generatedDate}</span>
                     </Card.Meta>
                     <Card.Description>
                         Matthew is a musician living in Nashville.

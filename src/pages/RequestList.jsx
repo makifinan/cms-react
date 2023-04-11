@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Icon, Menu, Table } from 'semantic-ui-react'
 import RequestService from '../services//RequestService.js'
+import { Link } from 'react-router-dom';
 export default function RequestList() {
 
     const [requests, setRequests] = useState([])
@@ -23,7 +24,7 @@ export default function RequestList() {
         <div>
             <Table className='table' celled>
                 <Table.Header>
-                    <Table.Row>
+                    <Table.Row >
                         <Table.HeaderCell>Başlık</Table.HeaderCell>
                         <Table.HeaderCell>Oluşturulma Tarihi</Table.HeaderCell>
                         <Table.HeaderCell>Bitiş Tarihi</Table.HeaderCell>
@@ -35,20 +36,19 @@ export default function RequestList() {
 
                 <Table.Body>
                     {
-
                         requests && requests.map((request) => (
-                            <Table.Row key={request.id}>
-                                 <Table.Cell>{request.title}</Table.Cell>
-                                <Table.Cell>{request.generatedDate}</Table.Cell>
-                                <Table.Cell>{request.endDate}</Table.Cell>
-                                <Table.Cell>{request.developerUserId}</Table.Cell>
-                                <Table.Cell>{request.priorityId}</Table.Cell>
-                                <Table.Cell>{request.statuId}</Table.Cell>
-                            </Table.Row>
+                            
+                                <Table.Row key={request.id}>
+                                   <Link to={`/requests/${request.id}`}> <Table.Cell>{request.title}</Table.Cell></Link>
+                                    <Table.Cell>{request.generatedDate}</Table.Cell>
+                                    <Table.Cell>{request.endDate}</Table.Cell>
+                                    <Table.Cell>{request.developerUserId}</Table.Cell>
+                                    <Table.Cell>{request.priorityId}</Table.Cell>
+                                    <Table.Cell>{request.statuId}</Table.Cell>
+                                </Table.Row>
+                            
                         ))
                     }
-
-
                 </Table.Body>
 
                 <Table.Footer>
