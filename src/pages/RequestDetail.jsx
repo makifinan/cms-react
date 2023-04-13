@@ -15,6 +15,11 @@ export default function RequestDetail() {
         })
 
     },[])
+    const optionsPriority = [
+        { key: 1, text: 'Yüksek', value: 1 },
+        { key: 2, text: 'Orta', value: 2 },
+        { key: 3, text: 'Düşük', value: 3 },
+      ]
     const options = [
         { key: 1, text: 'Atama Bekliyor', value: 1 },
         { key: 2, text: 'Atama Yapıldı', value: 2 },
@@ -26,7 +31,7 @@ export default function RequestDetail() {
             <Card.Group >
                 <Card fluid>
                     <Card.Content>
-                        <Icon bell />
+                        <Icon />
                         <Card.Header>{request.title}</Card.Header>
                         <Card.Meta>Oluşturulma Tarihi : {request.generatedDate}</Card.Meta>
                         <Card.Meta>Son Tarih : {request.endDate}</Card.Meta>
@@ -35,7 +40,7 @@ export default function RequestDetail() {
                         </Card.Description>
                         <Card.Description> Öncelik : 
                             <Menu compact>
-                                <Dropdown text={request.priorityId} options={options} simple item />
+                                <Dropdown text={request.priorityId} options={optionsPriority} simple item />
                             </Menu>
                         </Card.Description>
                         <Card.Description> Durum : 

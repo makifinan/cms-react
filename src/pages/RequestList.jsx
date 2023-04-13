@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react'
-import { Button, Icon, Menu, Table } from 'semantic-ui-react'
+import { Button, Icon, Menu, Table, TableBody } from 'semantic-ui-react'
 import RequestService from '../services//RequestService.js'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 export default function RequestList() {
 
     const [requests, setRequests] = useState([])
@@ -43,23 +43,26 @@ export default function RequestList() {
                         <Table.HeaderCell>Durum</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
-
+                
                 <Table.Body>
                     {   
                         requests && requests.map((request) => (
-
-                            <Table.Row key={request.id}>
-                                <Link to={`/requests/${request.id}`}> <Table.Cell>{request.title}</Table.Cell></Link>
+                           
+                            <Table.Row  key={request.id}>
+                                 <Table.Cell><Link to={`/requests/${request.id}`}>{request.title}</Link></Table.Cell>
                                 <Table.Cell>{request.generatedDate}</Table.Cell>
                                 <Table.Cell>{request.endDate}</Table.Cell>
                                 <Table.Cell>{request.developerUserId}</Table.Cell>
                                 <Table.Cell>{request.priorityId}</Table.Cell>
                                 <Table.Cell>{request.statuId}</Table.Cell>
                             </Table.Row>
+                           
+                            
 
                         ))
                     }
                 </Table.Body>
+                
 
                 <Table.Footer>
                     <Table.Row>
