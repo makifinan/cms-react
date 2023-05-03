@@ -39,7 +39,7 @@ export default function RequestDetail() {
             setStatus(result.data)
         })
 
-        let developerUserService = DeveloperUserService()
+        let developerUserService =new DeveloperUserService()
         developerUserService.getDeveloperUsers().then((result) => {
             setDevelopers(result.data)
         })
@@ -114,7 +114,11 @@ export default function RequestDetail() {
                                 placeholder='Durum'
                                 closeOnEscape
                                 selection
-                                options={options}
+                                options={status.map((statu) => ({
+                                    key: statu.id,
+                                    text: statu.statuName,
+                                    value: 3,
+                                }))}
                             />
 
                         </Card.Description>
