@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Icon, Menu, Table } from 'semantic-ui-react'
 import DeveloperUserService from '../services/DeveloperUserService'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 export default function DeveloperDetail() {
     let { id } = useParams()
 
 
     const [developer, setDeveloper] = useState([])
+    const [developersrequests, setDevelopersrequests] = useState([])
 
     useEffect(() => {
         let developerService = new DeveloperUserService()
         developerService.getById(id).then((result) => {
             setDeveloper(result.data)
         })
+        developerService.getByDeveloperRequest(id).then((result) => {
+            setDevelopersrequests(result.data)
+        })
+
     }, [])
+
+
 
     return (
         <div className='developerdetail'>
@@ -46,32 +53,22 @@ export default function DeveloperDetail() {
                         </Table.Header>
 
                         <Table.Body>
-                            <Table.Row>
-                                <Table.Cell>
-                                    Cell
-                                </Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                                <Table.Cell>Cell</Table.Cell>
-                            </Table.Row>
+                            {
+                                developersrequests.map((request) => (
+
+                                    <Table.Row>
+                                        <Table.Cell>
+                                        <Link to={`/requests/${request.id}`}>{request.title}</Link>
+                                        </Table.Cell>
+                                        <Table.Cell>{request.generatedDate}</Table.Cell>
+                                        <Table.Cell>{request.endDate}</Table.Cell>
+                                        <Table.Cell>{request.developerUserId}</Table.Cell>
+                                        <Table.Cell>{request.priorityId}</Table.Cell>
+                                        <Table.Cell>{request.statuId}</Table.Cell>
+                                    </Table.Row>
+                                ))
+
+                            }
                         </Table.Body>
 
                         <Table.Footer>
@@ -95,7 +92,7 @@ export default function DeveloperDetail() {
                     </Table>
                 </Card.Content>
                 <Card.Content extra>
-                    
+
                 </Card.Content>
             </Card>
         </div>

@@ -8,7 +8,7 @@ export default function Navi() {
   return (
     <div className='navi' style={{backgroundColor:'#808080'}}>
       
-      <Menu inverted>
+      <Menu >
         <Menu.Item >
         <p className='pZiraat'>ZİRAAT TEKNOLOJİ</p>
         
