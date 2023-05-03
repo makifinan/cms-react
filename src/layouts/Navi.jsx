@@ -6,9 +6,9 @@ import { Link, NavLink } from 'react-router-dom'
 
 export default function Navi() {
   return (
-    <div className='navi' style={{backgroundColor:'#808080'}}>
+    <div  >
       
-      <Menu >
+      <Menu className='navi' style={{backgroundColor:'#474747'}} >
         <Menu.Item >
         <p className='pZiraat'>ZİRAAT TEKNOLOJİ</p>
         
@@ -16,7 +16,7 @@ export default function Navi() {
         
           <Menu.Item as={NavLink} to="/"
             name='Ana Sayfa'
-
+            
           />
           
           <Menu.Menu position='right'>

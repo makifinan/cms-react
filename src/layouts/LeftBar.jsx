@@ -13,7 +13,7 @@ export default function LeftBar() {
   },[])
   return (
     <div>
-      <Menu vertical >
+      <Menu vertical>
         
         <Link to={"/createcall"}><Menu.Item 
           name='Çağrı Oluştur'

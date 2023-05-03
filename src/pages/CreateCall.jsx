@@ -18,13 +18,13 @@ export default function CreateCall() {
             label='Title'
             placeholder='Title'
           />
-          <Form.Field
+          <Form.Select
             control={Select}
             label='Priority'
             
             placeholder='Priority'
           />
-          <Form.Field
+          <Form.Select
             control={Select}
             label='Developer'
             

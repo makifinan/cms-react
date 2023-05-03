@@ -9,8 +9,7 @@ import DeveloperUserService from '../services/DeveloperUserService'
 
 export default function RequestDetail() {
     let { id } = useParams({})
-    let optionsPriorities = []
-    let optionsStatus = []
+ 
     const [request, setRequest] = useState({})
     const [priorities, setPriorities] = useState([])
     const [status, setStatus] = useState([])
@@ -27,11 +26,7 @@ export default function RequestDetail() {
         let priorityService = new PriorityService()
         priorityService.getPriorities().then((result) => {
             setPriorities(result.data)
-            optionsPriorities = priorities.map((priority) => ({
-                key: priority.id,
-                text: priority.priorityName,
-                value: 3,
-            }));
+            
         })
         
         let statuService = new StatuService()
@@ -45,26 +40,6 @@ export default function RequestDetail() {
         })
 
     }, [])
-    
-   
-    debugger;
-    /* priorities.map((priority) => {
-        optionsPriorities = [
-            { key: priority.id, text: priority.priorityName, value: 3 }
-            
-
-
-        ]
-        debugger;
-    }
-
-    )*/
-
-    const options = [
-        { key: 1, text: 'Atama Bekliyor', value: 1 },
-        { key: 2, text: 'Atama Yapıldı', value: 2 },
-        { key: 3, text: 'Çözüldü', value: 3 },
-    ]
 
     return (
         <div className='requestdetail'>
@@ -87,7 +62,7 @@ export default function RequestDetail() {
                                 options={priorities.map((priority) => ({
                                     key: priority.id,
                                     text: priority.priorityName,
-                                    value: 3,
+                                    value: priority.priorityName,
                                 }))}
                             />
 
@@ -100,7 +75,7 @@ export default function RequestDetail() {
                                 options={developers.map((developer) => ({
                                     key: developer.id,
                                     text: developer.firstName + ' ' + developer.lastName,
-                                    value: 3,
+                                    value: developer.firstName,
                                 }))}
                                 
                             >
@@ -117,7 +92,7 @@ export default function RequestDetail() {
                                 options={status.map((statu) => ({
                                     key: statu.id,
                                     text: statu.statuName,
-                                    value: 3,
+                                    value: statu.statuName,
                                 }))}
                             />
 
