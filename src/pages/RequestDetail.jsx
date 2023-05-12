@@ -10,19 +10,20 @@ import DeveloperUserService from '../services/DeveloperUserService'
 export default function RequestDetail() {
     let { id } = useParams({})
  
-    const [request, setRequest] = useState({})
+    const [request, setRequest] = useState([])
     const [priorities, setPriorities] = useState([])
     const [status, setStatus] = useState([])
     const [developers, setDevelopers] = useState([])
 
     useEffect(() => {
         let requestService = new RequestService()
-        requestService.getById(id).then((result) => {
-            setRequest(result.data)
-
+        requestService.getByIdRequestDetail(id).then((result) => {
+            setRequest(result.data[0])
+            
+            console.log(result.data)
 
         })
-
+        
         let priorityService = new PriorityService()
         priorityService.getPriorities().then((result) => {
             setPriorities(result.data)
@@ -40,7 +41,7 @@ export default function RequestDetail() {
         })
 
     }, [])
-
+    
     return (
         <div className='requestdetail'>
             <Card.Group >
@@ -55,7 +56,7 @@ export default function RequestDetail() {
                         </Card.Description>
                         <div style={{margin:'1em'}}>
                         <Card.Description > Öncelik :
-                            <Dropdown text={request.priorityId}
+                            <Dropdown text={request.priorityName}
                                 placeholder='Öncelik'
                                 closeOnEscape
                                 selection
@@ -68,7 +69,7 @@ export default function RequestDetail() {
 
                         </Card.Description>
                         <Card.Description style={{margin:'1em'}} > Developer :
-                            <Dropdown text={request.developerUserId}
+                            <Dropdown text={request.firstName + " "+request.lastName}
                                 placeholder='Developer'
                                 closeOnEscape
                                 selection
@@ -85,7 +86,7 @@ export default function RequestDetail() {
                         </Card.Description>
                         <Card.Description style={{margin:'1em'}}> Durum :
 
-                            <Dropdown text={request.statuId}
+                            <Dropdown text={request.statuName}
                                 placeholder='Durum'
                                 closeOnEscape
                                 selection

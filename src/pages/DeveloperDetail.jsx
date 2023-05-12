@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Icon, Menu, Table } from 'semantic-ui-react'
 import DeveloperUserService from '../services/DeveloperUserService'
+import RequestService from '../services/RequestService'
 import { Link, useParams } from 'react-router-dom'
 
 export default function DeveloperDetail() {
@@ -15,7 +16,8 @@ export default function DeveloperDetail() {
         developerService.getById(id).then((result) => {
             setDeveloper(result.data)
         })
-        developerService.getByDeveloperRequest(id).then((result) => {
+        let requestService = new RequestService()
+        requestService.getByDeveloperRequestDetail(id).then((result) => {
             setDevelopersrequests(result.data)
         })
 
@@ -62,9 +64,9 @@ export default function DeveloperDetail() {
                                         </Table.Cell>
                                         <Table.Cell>{request.generatedDate}</Table.Cell>
                                         <Table.Cell>{request.endDate}</Table.Cell>
-                                        <Table.Cell>{request.developerUserId}</Table.Cell>
-                                        <Table.Cell>{request.priorityId}</Table.Cell>
-                                        <Table.Cell>{request.statuId}</Table.Cell>
+                                        <Table.Cell>{request.firstName + " " + request.lastName}</Table.Cell>
+                                        <Table.Cell>{request.priorityName}</Table.Cell>
+                                        <Table.Cell>{request.statuName}</Table.Cell>
                                     </Table.Row>
                                 ))
 

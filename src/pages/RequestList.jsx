@@ -1,15 +1,15 @@
 
 import React, { useEffect, useState } from 'react'
-import { Button, Icon, Menu, Table, TableBody } from 'semantic-ui-react'
+import { Button, Icon, Menu, Table } from 'semantic-ui-react'
 import RequestService from '../services//RequestService.js'
-import { Link, NavLink } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 export default function RequestList() {
 
     const [requests, setRequests] = useState([])
     
     useEffect(() => {
         let requestService = new RequestService();
-        requestService.getRequests()
+        requestService.getRequestsDetail()
             .then((result) => {
                 setRequests(result.data);
                 
@@ -52,9 +52,9 @@ export default function RequestList() {
                                  <Table.Cell><Link to={`/requests/${request.id}`}>{request.title}</Link></Table.Cell>
                                 <Table.Cell>{request.generatedDate}</Table.Cell>
                                 <Table.Cell>{request.endDate}</Table.Cell>
-                                <Table.Cell>{request.developerUserId}</Table.Cell>
-                                <Table.Cell>{request.priorityId}</Table.Cell>
-                                <Table.Cell>{request.statuId}</Table.Cell>
+                                <Table.Cell>{request.firstName + " " + request.lastName}</Table.Cell>
+                                <Table.Cell>{request.priorityName}</Table.Cell>
+                                <Table.Cell>{request.statuName}</Table.Cell>
                             </Table.Row>
                            
                             

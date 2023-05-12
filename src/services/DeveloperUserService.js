@@ -12,4 +12,6 @@ export default class DeveloperUserService {
     getByDeveloperRequest(id){
         return axios.get("http://localhost:5233/api/Requests/getbydeveloperrequest?id="+id)
     }
+
+    
 }
