@@ -18,6 +18,7 @@ export default function RequestDetail() {
     const [selectedPriority, setSelectedPriority] = useState('')
     const [selectedDeveloper, setSelectedDeveloper] = useState('')
     const [selectedStatus, setSelectedStatu] = useState('')
+    const [requestId,setRequestId]=useState({})
 
 
 
@@ -28,6 +29,9 @@ export default function RequestDetail() {
 
             console.log(result.data)
 
+        })
+        requestService.getById(id).then((result) => {
+            setRequestId(result.data)
         })
 
         let priorityService = new PriorityService()
@@ -46,6 +50,8 @@ export default function RequestDetail() {
             setDevelopers(result.data)
         })
 
+        
+
     }, [])
 
     const handlePriorityChange = (event, data) => {
@@ -53,7 +59,7 @@ export default function RequestDetail() {
         console.log(data.value)
     };
 
-    //let DeveloperUserId = request.developerUserId
+    
 
     const handleDeveloperChange = (event, data) => {
         const selectedDeveloperId = data.value;
@@ -69,16 +75,30 @@ export default function RequestDetail() {
 
 
     const handleUpdateClick = () => {
+        
+        let developerUserId = requestId.developerUserId;
+        if (selectedDeveloper) {
+            developerUserId = encodeURIComponent(selectedDeveloper);
+        }
 
+        let statuId=requestId.statuId
+        if(selectedStatus){
+            statuId=encodeURIComponent(selectedStatus)
+        }
+
+        let priorityId = requestId.priorityId
+        if(selectedPriority){
+            priorityId=encodeURIComponent(selectedPriority)
+        }
 
         const description = encodeURIComponent(request.description);
         const endDate = encodeURIComponent(request.endDate);
         const title = encodeURIComponent(request.title);
         const managerUserId = encodeURIComponent(request.managerUserId);
-        const priorityId = encodeURIComponent(selectedPriority);
-        const statuId = encodeURIComponent(selectedStatus);
+        priorityId = encodeURIComponent(priorityId);
+        statuId = encodeURIComponent(statuId);
         const id = encodeURIComponent(request.id);
-        const developerUserId = encodeURIComponent(selectedDeveloper)
+        developerUserId = encodeURIComponent(developerUserId)
 
 
 
