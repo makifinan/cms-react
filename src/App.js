@@ -13,7 +13,7 @@ import Dashboard from './layouts/Dashboard';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" >
       <Dashboard/>
       
     </div>
