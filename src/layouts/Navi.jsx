@@ -2,13 +2,13 @@ import React from 'react'
 import { Menu, MenuItem } from 'semantic-ui-react'
 import Account from './Account'
 import Notification from './Notification'
-import { Link, NavLink } from 'react-router-dom'
+import {  NavLink } from 'react-router-dom'
 
 export default function Navi() {
   return (
     <div  >
       
-      <Menu className='navi' style={{backgroundColor:'#474747'}} >
+      <Menu className='navi' style={{backgroundColor:'rgb(255,71,71)'}} >
         <Menu.Item >
         <p className='pZiraat'>ZİRAAT TEKNOLOJİ</p>
         

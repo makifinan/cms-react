@@ -15,20 +15,19 @@ export default function CreateCall() {
         <Form.Group widths='equal'>
           <Form.Field
             control={Input}
-            label='Title'
-            placeholder='Title'
+            label='Başlık'
+            placeholder='Başlık'
           />
           <Form.Select
             control={Select}
-            label='Priority'
-            
-            placeholder='Priority'
+            label='Öncelik'
+            placeholder='Öncelik'
           />
           <Form.Select
             control={Select}
-            label='Developer'
+            label='Geliştirici'
             
-            placeholder='Developer'
+            placeholder='Geliştirici'
           />
         </Form.Group>
         <Form.Group inline>
@@ -57,11 +56,11 @@ export default function CreateCall() {
         </Form.Group>
         <Form.Field
           control={TextArea}
-          label='Description'
-          placeholder='Tell us more about you...'
+          label='Açıklama'
+          placeholder='Açıklama Giriniz...'
         />
         
-        <Form.Field control={Button}>Create</Form.Field>
+        <Form.Field control={Button}>Oluştur</Form.Field>
       </Form>
     </div>
   )
