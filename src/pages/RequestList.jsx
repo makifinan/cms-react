@@ -2,34 +2,87 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Icon, Menu, Table } from 'semantic-ui-react'
 import RequestService from '../services//RequestService.js'
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 export default function RequestList() {
 
     const [requests, setRequests] = useState([])
-    
+    const [filter, setFilter] = useState('tumu')
+    const [filteredRequests, setFilteredRequests] = useState([])
+
     useEffect(() => {
         let requestService = new RequestService();
         requestService.getRequestsDetail()
             .then((result) => {
                 setRequests(result.data);
-                
+
             })
             .catch((error) => {
                 console.error(error);
             });
     }, []);
 
+    useEffect(() => {
+        const currentDate = new Date();
+        
+        if (filter === 'tumu') {
+            setFilteredRequests(requests);
+        } else if (filter === 'zamani yaklasanlar') {
+            const upcomingRequests = requests.filter((request) => isUpcoming(request.endDate));
+            setFilteredRequests(upcomingRequests);
+        } else if (filter === 'zamani gecen') {
+            const expiredRequests = requests.filter((request) => isExpired(request.endDate));
+            setFilteredRequests(expiredRequests);
+        } else if (filter === 'atama bekleyen') {
+            const pendingRequests = requests.filter((request) => request.statuName === 'Atama Bekliyor');
+            setFilteredRequests(pendingRequests);
+        } else if (filter === 'cozuldu') {
+            const resolvedRequests = requests.filter((request) => request.statuName === 'Çözüldü');
+            setFilteredRequests(resolvedRequests);
+        }
+    }, [requests, filter])
 
+    const isExpired = (endDate) => {
+        const currentDate = new Date();
+        return new Date(formatDate(endDate)) < currentDate;
+      };
+    
+      const isUpcoming = (endDate) => {
+        const currentDate = new Date();
+        return new Date(formatDate(endDate)) > currentDate;
+      };
+    
+      const formatDate = (dateString) => {
+        const [day, month, year] = dateString.split('.');
+        return `${month}/${day}/${year}`;
+      };
+    
+    const handleFilterChange = (newFilter) => {
+        setFilter(newFilter)
+    }
+    const getRowColor = (status) => {
+        switch (status) {
+          case 'Atama Bekliyor':
+            return 'yellow';
+          case 'Çözüldü':
+            return 'green';
+          default:
+            return 'white';
+        }
+      };
+    /*const isExpired = (endDate) => {
+        const currentDate = new Date();
+        return new Date(endDate) < currentDate;
+      };*/
 
     return (
         <div>
             <div className='buttongroup '>
 
-                <Button>Tüm Çağrılar</Button>
-                <Button>Zamanı Yaklaşanlar</Button>
-                <Button>Zamanı Geçenler</Button>
-                <Button>Atama Bekleyenler</Button>
-                <Button>Çözüldü</Button>
+                <Button onClick={() => { handleFilterChange('tumu') }}>Tüm Çağrılar</Button>
+                <Button onClick={() => { handleFilterChange('zamani yaklasanlar') }}>Zamanı Yaklaşanlar</Button>
+                <Button onClick={() => { handleFilterChange('zamani gecen') }}>Zamanı Geçenler</Button>
+                <Button onClick={() => { handleFilterChange('atama bekleyen') }}>Atama Bekleyenler</Button>
+                <Button onClick={() => { handleFilterChange('cozuldu') }}>Çözüldü</Button>
 
             </div>
             <Table className='table' celled>
@@ -43,26 +96,27 @@ export default function RequestList() {
                         <Table.HeaderCell>Durum</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
-                
+
                 <Table.Body>
-                    {   
-                        requests && requests.map((request) => (
-                           
-                            <Table.Row  key={request.id}>
-                                 <Table.Cell><Link to={`/requests/${request.id}`}>{request.title}</Link></Table.Cell>
+                    {
+                        filteredRequests && filteredRequests.map((request) => (
+
+                            <Table.Row key={request.id} style={{ backgroundColor: isExpired(request.endDate) ? 'red' : getRowColor(request.statuName) }}
+                             >
+                                <Table.Cell><Link to={`/requests/${request.id}`}>{request.title}</Link></Table.Cell>
                                 <Table.Cell>{request.generatedDate}</Table.Cell>
                                 <Table.Cell>{request.endDate}</Table.Cell>
                                 <Table.Cell>{request.firstName + " " + request.lastName}</Table.Cell>
                                 <Table.Cell>{request.priorityName}</Table.Cell>
                                 <Table.Cell>{request.statuName}</Table.Cell>
                             </Table.Row>
-                           
-                            
+
+
 
                         ))
                     }
                 </Table.Body>
-                
+
 
                 <Table.Footer>
                     <Table.Row>

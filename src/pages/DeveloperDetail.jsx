@@ -23,7 +23,31 @@ export default function DeveloperDetail() {
 
     }, [])
 
+    const isExpired = (endDate) => {
+        const currentDate = new Date();
+        return new Date(formatDate(endDate)) < currentDate;
+      };
+    
+      const isUpcoming = (endDate) => {
+        const currentDate = new Date();
+        return new Date(formatDate(endDate)) > currentDate;
+      };
+    
+      const formatDate = (dateString) => {
+        const [day, month, year] = dateString.split('.');
+        return `${month}/${day}/${year}`;
+      };
 
+      const getRowColor = (status) => {
+        switch (status) {
+          case 'Atama Bekliyor':
+            return 'yellow';
+          case 'Çözüldü':
+            return 'green';
+          default:
+            return 'white';
+        }
+      };
 
     return (
         <div className='developerdetail'>
@@ -58,9 +82,9 @@ export default function DeveloperDetail() {
                             {
                                 developersrequests.map((request) => (
 
-                                    <Table.Row>
+                                    <Table.Row style={{ backgroundColor: isExpired(request.endDate) ? 'red' : getRowColor(request.statuName) }}>
                                         <Table.Cell>
-                                        <Link to={`/requests/${request.id}`}>{request.title}</Link>
+                                        <Link to={`/requests/${request.id}`} >{request.title}</Link>
                                         </Table.Cell>
                                         <Table.Cell>{request.generatedDate}</Table.Cell>
                                         <Table.Cell>{request.endDate}</Table.Cell>
