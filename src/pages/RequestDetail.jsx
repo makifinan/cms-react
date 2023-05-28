@@ -110,7 +110,6 @@ export default function RequestDetail() {
         axios
             .post(url)
             .then((response) => {
-                // Başarılı bir şekilde güncellendiğinde yapılacak işlemler
                 console.log('Güncelleme başarılı!');
             })
             .catch((error) => {
@@ -154,7 +153,8 @@ export default function RequestDetail() {
 
                             </Card.Description>
                             <Card.Description style={{ margin: '1em' }} > Developer :
-                                <Dropdown text={selectedDeveloper ? developers.find((developer) => developer.id === selectedDeveloper)?.firstName + ' ' + developers.find((developer) => developer.id === selectedDeveloper)?.lastName : request.firstName + ' ' + request.lastName}
+                                <Dropdown 
+                                text={selectedDeveloper ? developers.find((developer) => developer.id === selectedDeveloper)?.firstName + ' ' + developers.find((developer) => developer.id === selectedDeveloper)?.lastName : request.firstName + ' ' + request.lastName}
                                     placeholder='Developer'
                                     closeOnEscape
                                     selection
