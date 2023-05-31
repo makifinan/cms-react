@@ -8,7 +8,7 @@ import DeveloperUserService from '../services/DeveloperUserService'
 import axios from 'axios'
 
 
-export default function RequestDetail() {
+export default function RequestDetail({ denemeDeveloper }) {
     let { id } = useParams({})
 
     const [request, setRequest] = useState([])
@@ -18,10 +18,12 @@ export default function RequestDetail() {
     const [selectedPriority, setSelectedPriority] = useState('')
     const [selectedDeveloper, setSelectedDeveloper] = useState('')
     const [selectedStatus, setSelectedStatu] = useState('')
-    const [requestId,setRequestId]=useState({})
+    const [requestId, setRequestId] = useState({})
 
-
-
+    console.log("gelen veri:" +  JSON.stringify(denemeDeveloper))
+    console.log(!denemeDeveloper)
+    //let gelenDenemeDeveloper=5
+    //gelenDenemeDeveloper=denemeDeveloper
     useEffect(() => {
         let requestService = new RequestService()
         requestService.getByIdRequestDetail(id).then((result) => {
@@ -50,7 +52,7 @@ export default function RequestDetail() {
             setDevelopers(result.data)
         })
 
-        
+
 
     }, [])
 
@@ -59,7 +61,7 @@ export default function RequestDetail() {
         console.log(data.value)
     };
 
-    
+
 
     const handleDeveloperChange = (event, data) => {
         const selectedDeveloperId = data.value;
@@ -75,20 +77,20 @@ export default function RequestDetail() {
 
 
     const handleUpdateClick = () => {
-        
+
         let developerUserId = requestId.developerUserId;
         if (selectedDeveloper) {
             developerUserId = encodeURIComponent(selectedDeveloper);
         }
 
-        let statuId=requestId.statuId
-        if(selectedStatus){
-            statuId=encodeURIComponent(selectedStatus)
+        let statuId = requestId.statuId
+        if (selectedStatus) {
+            statuId = encodeURIComponent(selectedStatus)
         }
 
         let priorityId = requestId.priorityId
-        if(selectedPriority){
-            priorityId=encodeURIComponent(selectedPriority)
+        if (selectedPriority) {
+            priorityId = encodeURIComponent(selectedPriority)
         }
 
         const description = encodeURIComponent(request.description);
@@ -117,7 +119,9 @@ export default function RequestDetail() {
             });
     };
 
-
+    const control = () => {
+        
+    }
 
 
 
@@ -152,24 +156,31 @@ export default function RequestDetail() {
                                 />
 
                             </Card.Description>
-                            <Card.Description style={{ margin: '1em' }} > Developer :
-                                <Dropdown 
-                                text={selectedDeveloper ? developers.find((developer) => developer.id === selectedDeveloper)?.firstName + ' ' + developers.find((developer) => developer.id === selectedDeveloper)?.lastName : request.firstName + ' ' + request.lastName}
-                                    placeholder='Developer'
-                                    closeOnEscape
-                                    selection
-                                    options={developers.map((developer) => ({
-                                        key: developer.id,
-                                        text: developer.firstName + ' ' + developer.lastName,
-                                        value: developer.id,
-                                    }))}
-                                    onChange={handleDeveloperChange}
-
-                                >
-
-                                </Dropdown>
-
+                            <Card.Description style={{ margin: '1em' }}>
+                                Developer :{' '}
+                                
+                                    <Dropdown
+                                        text={
+                                            selectedDeveloper
+                                                ? developers.find((developer) => developer.id === selectedDeveloper)?.firstName +
+                                                ' ' +
+                                                developers.find((developer) => developer.id === selectedDeveloper)?.lastName
+                                                : request.firstName + ' ' + request.lastName
+                                        }
+                                        placeholder="Developer"
+                                        closeOnEscape
+                                        selection
+                                        options={developers.map((developer) => ({
+                                            key: developer.id,
+                                            text: developer.firstName + ' ' + developer.lastName,
+                                            value: developer.id,
+                                        }))}
+                                        disabled={ denemeDeveloper &&  typeof denemeDeveloper !== 'object'  ? true  : false  }
+                                        onChange={handleDeveloperChange} 
+                                    />
+                                
                             </Card.Description>
+
                             <Card.Description style={{ margin: '1em' }}> Durum :
 
                                 <Dropdown text={selectedStatus ? status.find((statu) => statu.id === selectedStatus)?.statuName : request.statuName}
@@ -181,6 +192,10 @@ export default function RequestDetail() {
                                         text: statu.statuName,
                                         value: statu.id,
                                     }))}
+                                    disabled={
+                                        
+                                        denemeDeveloper !== request.firstName + ' ' + request.lastName ? true : false
+                                    }
                                     onChange={handleStatusChange}
                                 />
 
