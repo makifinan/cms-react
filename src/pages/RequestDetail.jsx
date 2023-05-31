@@ -192,9 +192,13 @@ export default function RequestDetail({ denemeDeveloper }) {
                                         text: statu.statuName,
                                         value: statu.id,
                                     }))}
-                                    disabled={
+                                    disabled={ 
+                                        //denemeDeveloper !== request.firstName + ' ' + request.lastName ? true : false
+                                        typeof denemeDeveloper === 'object' ? false : (denemeDeveloper !== request.firstName + ' ' + request.lastName ? true : false)
+
+                                    
                                         
-                                        denemeDeveloper !== request.firstName + ' ' + request.lastName ? true : false
+                                        
                                     }
                                     onChange={handleStatusChange}
                                 />

@@ -11,14 +11,15 @@ export default function LeftBar() {
     let developerService = new DeveloperUserService();
     developerService.getDeveloperUsers().then(result => setDevelopers(result.data))
   },[])
+  /* <Link to={"/createcall"}><Menu.Item 
+          name='Çağrı Oluştur'
+
+        /></Link>*/
   return (
     <div className='leftbar'>
       <Menu vertical className='leftbar'>
         
-        <Link to={"/createcall"}><Menu.Item 
-          name='Çağrı Oluştur'
-
-        /></Link>
+        
         <Menu.Item vertical="true" className='leftbar'>
         <Dropdown text='Geliştiriciler'>
           <Dropdown.Menu>
