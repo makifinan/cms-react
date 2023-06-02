@@ -113,19 +113,13 @@ export default function RequestDetail({ denemeDeveloper }) {
             .post(url)
             .then((response) => {
                 console.log('Güncelleme başarılı!');
+                alert("güncelleme başarılı")
+                window.location.reload();
             })
             .catch((error) => {
                 console.error('Güncelleme hatası:', error);
             });
     };
-
-    const control = () => {
-        
-    }
-
-
-
-
 
 
     return (
@@ -195,10 +189,6 @@ export default function RequestDetail({ denemeDeveloper }) {
                                     disabled={ 
                                         //denemeDeveloper !== request.firstName + ' ' + request.lastName ? true : false
                                         typeof denemeDeveloper === 'object' ? false : (denemeDeveloper !== request.firstName + ' ' + request.lastName ? true : false)
-
-                                    
-                                        
-                                        
                                     }
                                     onChange={handleStatusChange}
                                 />
