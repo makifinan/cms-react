@@ -8,3 +8,14 @@
     background-color:#ff0000;
     color:#fff;
 }
+.kullanıcıdegistir {
+    margin: 0;
+    padding: 0;
+}
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+.managerbutton {
+    margin:100px;
+}
